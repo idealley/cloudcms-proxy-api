@@ -40,7 +40,7 @@ gitana.connect(function(err) {
             console.log("---------------------------------------------------------");
             console.log("Hello World (Express) is alive and kicking!");
             console.log("");
-            console.log("   To view the sample menu, go to http://localhost:" + server.address().port + "/main-menu");
+            console.log("   To view the sample menu, go to http://localhost:" + server.address().port + "/a-category");
             console.log("");
         });
 
