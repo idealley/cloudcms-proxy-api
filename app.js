@@ -1,7 +1,8 @@
 
 const express = require('express');
 const path = require('path');
-const gitana = require("gitana");
+const gitana = require('gitana');
+const cors = require('cors');
 
 const r = require('./src/requests.js');
 const util = require('./src/util.js');
@@ -12,11 +13,8 @@ const breadcrumbParser = require('./src/middleware/breadcrumbParser.js');
 
 const app = express();
 
-// view engine setup
-app.set('views', path.join(__dirname, 'views'));
-app.set('view engine', 'jade');
-
 app.use(express.static(path.join(__dirname, 'public')));
+app.use(cors());
 
 // connect to Cloud CMS
 // this looks for gitana.json in local directory
@@ -61,8 +59,7 @@ const bindControllers = function(branch, app)
             }).catch(() => {});
         }).catch(() => {});
     }, menuParser, (req, res, next) => {
-            res.render('index', { menu: res.data });
-            //res.json(res.data);
+            res.json(res.data);
     });
 
 
@@ -84,8 +81,7 @@ const bindControllers = function(branch, app)
             }).catch(() => {});;
         }).catch(() => {});
     }, breadcrumbParser, (req, res, next) => {
-        res.render('page', { data: res.data });
-        //res.json(res.data);
+        res.json(res.data);
     });    
 
 
